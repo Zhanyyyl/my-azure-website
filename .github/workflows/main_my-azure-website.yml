@@ -1,37 +1,19 @@
-name: Azure Website Deploy
+name: Deploy to Azure
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18.x'
-    
-    - name: Install dependencies
-      run: npm install
-    
-    - name: Build project
-      run: npm run build
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    
-    steps:
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'my-azure-website'  
+        app-name: 'my-azure-website'
         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-
-          
+        package: .
