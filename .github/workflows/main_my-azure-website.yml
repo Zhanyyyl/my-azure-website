@@ -14,7 +14,8 @@ jobs:
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'zhanylweb'
+        app-name: 'my-azure-website'
         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
         package: .
+
 
